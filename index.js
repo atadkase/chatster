@@ -3,8 +3,9 @@ var express = require('express');
 var http = require('http').Server(chatster);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
-var mysql = require('mysql');
-var con = mysql.createConnection({
+var db = require('./db');
+//var mysql = require('mysql');
+/*var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
@@ -18,9 +19,10 @@ con.connect(function(err) {
     }
     console.log('Connection established');
     // connected!
-});
+}); */
 
 chatster.use(express.static(__dirname + '/public/css'));
+
 chatster.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 
@@ -32,7 +34,7 @@ chatster.get('/client_script.js', function(req, res) {
 });
 
 chatster.get('/messages', function(req, response) {
-    con.query('SELECT chat_name, timestmp, message FROM chat_message', function(err, res) {
+    db.query('SELECT chat_name, timestmp, message FROM chat_message', function(err, res) {
         if (err) {
             console.log('Error inserting into DB');
         } else {
@@ -54,7 +56,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on('update_chat', function(req, resp) {
-        con.query('SELECT chat_name, timestmp, message FROM chat_message', function(err, res) {
+        db.query('SELECT chat_name, timestmp, message FROM chat_message', function(err, res) {
             if (err) {
                 console.log('Error inserting into DB');
             } else {
@@ -84,7 +86,7 @@ io.on('connection', function(socket) {
             message: packet.msg,
             timestmp: time
         };
-        con.query('INSERT INTO chat_message SET ?', db_packet, function(err, res) {
+        db.query('INSERT INTO chat_message SET ?', db_packet, function(err, res) {
             if (err) {
                 console.log('Error inserting into DB');
             } else {
