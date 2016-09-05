@@ -4,22 +4,6 @@ var http = require('http').Server(chatster);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var db = require('./db');
-//var mysql = require('mysql');
-/*var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'chatster_schema'
-});
-
-con.connect(function(err) {
-    if (err) {
-        console.log('Error connecting to DB');
-        return;
-    }
-    console.log('Connection established');
-    // connected!
-}); */
 
 chatster.use(express.static(__dirname + '/public/css'));
 
