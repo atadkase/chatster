@@ -1,113 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	<link rel ="stylesheet" type="text/css" href = "style.css">
-	<title>
-		Ch@tster!
-	</title>
-	<h2 id = "header"> Ch@tster </h2>
-</head>
-<body>
-<div class = "container">
-<div class = "row">
-<form action = "">
-	
-	
-		<ul id = "messages" class="list-group"> </ul>
-		<center>
-		<div id = "name_input">
-			<div class="form-group">
-				<label for="chatter"> Please enter your name </label>
-				<br>
-				<input type = text id = "chatter" autocomplete = off class = "form-control" />
-				<br>
-				<input type = submit class="btn btn-primary btn-lg" value = "Submit" onClick="return is_empty()">
-			</div>
-
-		</div>
-	</center>	
-		<div id = "chat_msg_input">
-				<div class="form-group" data-spy="affix-bottom">
-				<input type = "text"  class = "form-control" id = "message_inp"  autocomplete = off />
-				<input type = submit class="btn btn-success btn-block" id = "post_button" value = "Post" onClick="return is_empty()"/>
-				</div>
-		</div>
-		
-	
-</form>
-</div>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="/client_script.js"></script>
-<!-- <script>
-  
-  var socket = io();
-  var chatter_id = false;
-  //var counter = 0;
-  $('#chat_msg_input').hide();
-  $('#chatter').focus();
-  function is_empty(){
-	var validation;
-	if(chatter_id == false)
-		validation = document.getElementById("chatter").value;
-	else
-		validation = document.getElementById("message_inp").value;
-    if (validation.trim() == "" || validation == 'null') {
-        return false;
-    };
-}
-  $('form').submit(function(){
-  if (chatter_id == false)
-  {
-	socket.emit('chatter_name',$('#chatter').val());
-	chatter_id = $('#chatter').val();
-	$('#chatter').val('');
-	$('#header').hide();
-	$('#name_input').hide();
-	$('#chat_msg_input').show();
-	$('#message_inp').focus();	
-	//socket.emit('update_chat','null',function(data){
-	//$('#head').append($(data)); // Feature developing!- Stay tuned
-	//});
-	$.getJSON('/messages', function(data){
-		$.each(data, function(index, element){
-				$('#messages').append($('<li class="list-group-item"> <span class ="recvd_name">'+element.chat_name+'</span> <span class ="recvd_timestamp pull-right">'+element.timestmp+'</span><br><br><span class ="recvd_message">'+element.message+'</span> </li>'));
-		});
-	});
-	
-	}
-  else
-  {
-	socket.emit('message', {name : chatter_id, msg: $('#message_inp').val()});
-	$('#message_inp').val('');
-	//counter++;
-  }
-  
-  
-  return false;
-  });
-  socket.on('proc_message',function(recvd_packet){
-		//var mesg = msg.message;
-	$('#messages').append($('<li class="list-group-item"> <span class ="recvd_name">'+recvd_packet.name+'</span> <span class ="recvd_timestamp pull-right">'+recvd_packet.timestamp+'</span><br><br><span class ="recvd_message">'+recvd_packet.message+'</span> </li>'));
-	scrollNewMessage();
-	//$('#r_name').append($('</div> <div class ="recvd_timestamp">').text(recvd_packet.timestamp));	
-	//$('#recvd_timestamp').append($('</div> <br> <div class ="recvd_message">').text(recvd_packet.message));
-	//$('#recvd_messages').append($('</div> </li>'));	
-	//$('#messages').append($('<li class="list-group-item">').text(recvd_packet.name+ ' ' + recvd_packet.message + ' :: ' + recvd_packet.timestamp));
-	return false;
-  });
- 
-  function scrollNewMessage(){
-	$('html, body').animate({ scrollTop: $(document).height() - $(window).height() }, 1000);
-  }
-  
-</script> -->
-</body>
-</html>
+   <html>
+      <head>
+         <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <link rel ="stylesheet" type="text/css" href = "style.css">
+         <title>
+            Ch@tster!
+         </title>
+         <h2 id = "header"> Ch@tster </h2>
+      </head>
+      <body>
+         <div class = "container">
+            <div class = "row">
+               <form action = "">
+                  <ul id = "messages" class="list-group"> </ul>
+                  <center>
+                     <div id = "name_input">
+                        <div class="form-group">
+                           <label for="chatter"> Please enter your name </label>
+                           <br>
+                           <input type = text id = "chatter" autocomplete = off class = "form-control" />
+                           <br>
+                           <input type = submit class="btn btn-primary btn-lg" value = "Submit" onClick="return is_empty()">
+                        </div>
+                     </div>
+                  </center>
+                  <div id = "chat_msg_input">
+                     <div class="form-group" data-spy="affix-bottom">
+                        <input type = "text"  class = "form-control" id = "message_inp"  autocomplete = off />
+                        <input type = submit class="btn btn-success btn-block" id = "post_button" value = "Post" onClick="return is_empty()"/>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <script src="/socket.io/socket.io.js"></script>
+         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+         <script src="/client_script.js"></script>
+      </body>
+   </html>
