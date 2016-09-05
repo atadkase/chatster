@@ -20,9 +20,9 @@ con.connect(function(err) {
   // connected!
 });
 
-chatster.use(express.static(__dirname + '/chat_files/css'));
+chatster.use(express.static(__dirname + '/public/css'));
 chatster.get('/', function(req, res){
-		res.sendFile(__dirname + '/chat_files/index.html');
+		res.sendFile(__dirname + '/public/index.html');
 
 });
 
@@ -78,9 +78,9 @@ io.on('connection', function(socket){
 			time = time + 'AM';
 		console.log(packet.name + ' says ' + packet.msg + ' at time ' + time);
 		//socket.broadcast.emit('proc_message',{packet, timestamp: time});
-		//io.sockets.emit('proc_message',{name: packet.name, message: packet.msg, timestamp: time});
+		io.sockets.emit('proc_message',{name: packet.name, message: packet.msg, timestamp: time});
 		var db_packet = {chat_name: packet.name, message: packet.msg, timestmp: time};
-		io.sockets.emit('proc_message',db_packet);
+		//io.sockets.emit('proc_message',db_packet);
 		con.query('INSERT INTO chat_message SET ?', db_packet, function(err,res){
 			if(err)
 			{
