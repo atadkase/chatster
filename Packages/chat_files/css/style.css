@@ -1,0 +1,49 @@
+center{
+	margin: auto;
+	width: 100%;
+	padding: 70px 0;
+	text-align: center;
+}
+
+h2{
+	text-align: center;
+}
+
+#chatter{
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+.recvd_name{
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+.recvd_timestamp{
+	font-size: 0.90em;
+}
+
+.recvd_message{
+	font-size: 1.10em;
+}
+
+.chat_msg_input{
+	bottom: 0;
+}
+
+.affix {
+  top: 0;
+  width: 100%;
+}
+
+.affix-top {
+  width: 100%;
+}
+
+.affix-bottom {
+  position: absolute;
+  width: 100%;  
+}
+
+
